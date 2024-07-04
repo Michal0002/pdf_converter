@@ -14,6 +14,9 @@ class ImageToPDFApp:
         self.upload_button = tk.Button(self.root, text = "Insert JPG/PNG file", command=self.upload_file)
         self.upload_button.pack(pady=10)
 
+        self.file_label = tk.Label(self.root, text="Selected file: None")
+        self.file_label.pack(pady=5)
+
         self.generate_button = tk.Button(self.root, text = "Generate PDF", command = self.generate_pdf)
         self.generate_button.pack(pady=10)
 
@@ -22,6 +25,7 @@ class ImageToPDFApp:
         self.file_path = filedialog.askopenfilename(filetypes=file_types)
 
         if self.file_path:
+            self.file_label.config(text=f"Selected file: {self.file_path}")
             messagebox.showinfo("File selected", f"Selected file: {self.file_path}")
         else:
             messagebox.showwarning("No file", "No file selected!")
@@ -46,6 +50,7 @@ class ImageToPDFApp:
 
         except Exception as e:
             messagebox.showerror("Error", f"Something went wrong: {e}")
+    
 if __name__ == "__main__":
     root = tk.Tk()
     app = ImageToPDFApp(root)
